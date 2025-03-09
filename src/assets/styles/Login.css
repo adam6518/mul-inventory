@@ -1,0 +1,33 @@
+.form-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    background-color: #ffffff;
+}
+
+.border .border-black {
+    margin: auto;
+}
+
+.form-img {
+    max-width: 100%;
+    height: auto;
+}
+
+.form-username {
+    margin: 2rem;
+}
+
+.form-password {
+    margin: 2rem;
+}
+
+.form-btn-sign-in {
+    margin: 2rem ;
+}
+
+.form-p {
+    margin: 2rem;
+}
