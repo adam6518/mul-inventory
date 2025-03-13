@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "../assets/styles/Login.css";
 import logoMU from "../assets/img/logo-mu.jpg"
 
@@ -21,7 +22,7 @@ export default class Login extends Component {
             />
           </div>
           <button type="submit" className="form-btn-sign-in btn btn-warning">
-            Sign In
+            <Link style={{ textDecoration: "none", color: "inherit" }} to="/dataproject">Sign In</Link>
           </button>
           <p className="form-p">Notes : Harap hubungi Admin jika belum mempunyai akun !</p>
         </form>

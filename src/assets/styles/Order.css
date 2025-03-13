@@ -1,0 +1,13 @@
+.table-order {
+  width: 80%;
+}
+
+.sidebar {
+  width: 20%;
+}
+
+.submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

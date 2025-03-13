@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Sidebar from "../components/Sidebar";
 import "../assets/styles/DataChecklist.css";
+import SearchBar from "../components/SearchBar";
 
 export default class DataChecklist extends Component {
   render() {
@@ -11,11 +12,7 @@ export default class DataChecklist extends Component {
         </div>
         <div className="p-2 table-data-checklist">
           <h1>Data Checklist</h1>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Search here..."
-          ></input>
+          <SearchBar/>
           <table className="table">
             <thead>
               <tr>

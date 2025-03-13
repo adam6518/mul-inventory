@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "../assets/styles/Sidebar.css";
 import logoMU from "../assets/img/logo-mu.jpg";
 
@@ -23,37 +24,37 @@ export default class sidebar extends Component {
             type="button"
             className="btn btn-outline-danger d-grid btn-lg"
           >
-            Data Project
+           <Link style={{ textDecoration: "none", color: "inherit" }} to="/dataproject">Data Project</Link>
           </button>
           <button
             type="button"
             className="btn btn-outline-danger d-grid btn-lg"
           >
-            Data Checklist
+            <Link style={{ textDecoration: "none", color: "inherit" }} to="/datachecklist">Data Checklist</Link>
           </button>
           <button
             type="button"
             className="btn btn-outline-danger d-grid btn-lg"
           >
-            Order
+            <Link style={{ textDecoration: "none", color: "inherit" }} to="/order">Order</Link>
           </button>
           <button
             type="button"
             className="btn btn-outline-danger d-grid btn-lg"
           >
-            Finansial
+            <Link style={{ textDecoration: "none", color: "inherit" }} to="/finance">Finansial</Link>
           </button>
           <button
             type="button"
             className="btn btn-outline-danger d-grid btn-lg"
           >
-            Analisa
+            <Link style={{ textDecoration: "none", color: "inherit" }} to="/analyze">Analisa</Link>
           </button>
           <button
             type="button"
             className="btn btn-outline-danger d-grid btn-lg"
           >
-            Data User
+            <Link style={{ textDecoration: "none", color: "inherit" }} to="/datauser">Data User</Link>
           </button>
         </div>
 
@@ -78,7 +79,7 @@ export default class sidebar extends Component {
               d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"
             />
           </svg>{" "}
-          Sign Out
+          <Link style={{ textDecoration: "none", color: "inherit" }} to="/">Sign Out</Link>
         </button>
       </div>
     );

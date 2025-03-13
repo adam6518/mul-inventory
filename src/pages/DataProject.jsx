@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Sidebar from "../components/Sidebar";
 import "../assets/styles/DataProject.css";
+import SearchBar from "../components/SearchBar";
 
 export default class DataProject extends Component {
   render() {
@@ -14,11 +15,7 @@ export default class DataProject extends Component {
         </div>
         <div className="p-2 table-data-project">
           <h1>Data Project</h1>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Search here..."
-          ></input>
+          <SearchBar/>
           <table className="table">
             <thead>
               <tr>

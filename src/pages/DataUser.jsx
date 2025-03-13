@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Sidebar from "../components/Sidebar";
 import "../assets/styles/DataUser.css";
+import SearchBar from "../components/SearchBar";
 
 export default class DataUser extends Component {
   render() {
@@ -14,11 +15,7 @@ export default class DataUser extends Component {
         </div>
         <div className="p-2 table-data-user">
           <h1>Data User</h1>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Search here..."
-          ></input>
+          <SearchBar/>
           <table className="table">
             <thead>
               <tr>
