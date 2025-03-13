@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Sidebar from "../components/Sidebar";
 import "../assets/styles/DataProject.css";
-import { Fragment } from "react";
 
 export default class DataProject extends Component {
   render() {
