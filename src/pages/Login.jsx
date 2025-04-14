@@ -1,32 +1,81 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../assets/styles/Login.css";
-import logoMU from "../assets/img/logo-mu.jpg"
+import logoMU from "../assets/img/logo-mu.jpg";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-export default class Login extends Component {
-  render() {
-    return (
-      <div className="form-login">
-        <form className="border border-black">
-        <img clasName="form-img" src={logoMU} alt="logo-mu" />
-          <div className="form-username">
-            <label className="form-label">Username</label>
-            <input className="form-control" placeholder="Input username..." />
-          </div>
-          <div className="form-password">
-            <label className="form-label">Password</label>
-            <input
-              type="password"
-              className="form-control"
-              placeholder="Input password..."
-            />
-          </div>
-          <button type="submit" className="form-btn-sign-in btn btn-warning">
-            <Link style={{ textDecoration: "none", color: "inherit" }} to="/dataproject">Sign In</Link>
-          </button>
-          <p className="form-p">Notes : Harap hubungi Admin jika belum mempunyai akun !</p>
-        </form>
-      </div>
-    );
+const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(username, password);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/login-user",
+        {username: username, password: password}
+      );
+      console.log(response.data);
+      
+      if(response.data.success) {
+        toast.success(response.data.message || 'Login Berhasil !')
+        console.log(response);
+        const token = response.data.token;
+        sessionStorage.setItem("authToken", token);
+        navigate("/dataproject")
+        
+      }else {
+        toast.error(response.data.message || 'Login Gagal !')
+      }
+    } catch (error) {
+      console.log('Terdapat eror saat login : ', error);
+      toast.error(error.response.data.message|| error.response.data.message || 'Coba lagi')
+    }
   }
-}
+    
+
+  return (
+    <div className="form-login">
+      <form onSubmit={handleSubmit} className="border border-black">
+        <img clasName="form-img" src={logoMU} alt="logo-mu" />
+        <div className="form-username">
+          <label className="form-label">Username</label>
+          <input
+            className="form-control"
+            placeholder="Input username..."
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className="form-password">
+          <label className="form-label">Password</label>
+          <input
+            type="password"
+            className="form-control"
+            placeholder="Input password..."
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <button type="submit" className="form-btn-sign-in btn btn-warning">
+          <Link
+            style={{ textDecoration: "none", color: "inherit" }}
+            to="/dataproject"
+          >
+            Sign In
+          </Link>
+        </button>
+        <p className="form-p">
+          Notes : Harap hubungi Admin jika belum mempunyai akun !
+        </p>
+      </form>
+    </div>
+  );
+};
+
+export default Login;
