@@ -1,17 +1,3 @@
-.table-order {
-  width: 80%;
-}
-
-.sidebar {
-  width: 20%;
-}
-
-.submit {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 table th {
   text-align: center; /* Horizontal center */
   vertical-align: middle; /* Vertical center */
@@ -22,15 +8,23 @@ td {
 }
 
 .table-container {
-  max-height: 68vh;
-  overflow-y: auto;
-  /* border: 1px solid #ddd; */
+  
+  max-height: 90vh; /* Adjust as needed */
+  overflow-y: auto; /* Enable vertical scrolling */
+ 
 }
 
 .sticky-header th {
   position: sticky;
   top: 0;
   z-index: 10;
-  /* Optional: add border-bottom for separation */
   border-bottom: 2px solid #000000;
+}
+
+.sidebar {
+  width: 20%;
+}
+
+.table-data-riwayat {
+  width: 80%;
 }

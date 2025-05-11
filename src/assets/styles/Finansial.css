@@ -1,24 +1,5 @@
-.table-order {
+.table-data-finansial {
   width: 80%;
-}
-
-.sidebar {
-  width: 20%;
-}
-
-.submit {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-table th {
-  text-align: center; /* Horizontal center */
-  vertical-align: middle; /* Vertical center */
-}
-
-td {
-  vertical-align: middle;
 }
 
 .table-container {
@@ -33,4 +14,8 @@ td {
   z-index: 10;
   /* Optional: add border-bottom for separation */
   border-bottom: 2px solid #000000;
+}
+
+.sidebar {
+  width: 20%;
 }
