@@ -40,6 +40,22 @@ const Finansial = () => {
     }
   };
 
+  const searchFinansial = async (query) => {
+    try {
+      const response = await axios.get(
+        "http://localhost:3000/api/finansial/search-finansial",
+        {
+          params: {
+            item: query,
+          },
+        }
+      );
+      setFilteredFinansial(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const dataToDisplay =
     filteredFinansial.length > 0 ? filteredFinansial : allFinansial;
 
@@ -60,22 +76,6 @@ const Finansial = () => {
       } else {
         toast.error("Gagal Menampilkan Data Sorting");
       }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const searchFinansial = async (query) => {
-    try {
-      const response = await axios.get(
-        "http://localhost:3000/api/finansial/search-finansial",
-        {
-          params: {
-            item: query,
-          },
-        }
-      );
-      setFilteredFinansial(response.data.data);
     } catch (error) {
       console.log(error);
     }

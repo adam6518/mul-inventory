@@ -20,7 +20,6 @@ const Riwayat = () => {
     sortDate(sortRiwayat);
   }, [sortRiwayat]);
 
-  // Reset currentPage to 1 when filteredRiwayat or allDataRiwayat changes
   useEffect(() => {
     setCurrentPage(1);
   }, [filteredRiwayat, allDataRiwayat]);

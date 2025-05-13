@@ -45,8 +45,6 @@ const DataProject = () => {
       const response = await axios.get(
         "http://localhost:3000/api/project/get-project"
       );
-      console.log(response.data.data);
-
       if (response.data.data && response.data.data.length > 0) {
         setAllDataProject(response.data.data);
       } else {
@@ -62,7 +60,6 @@ const DataProject = () => {
       const request = await axios.delete(
         `http://localhost:3000/api/project/delete-project/${projectId}`
       );
-      console.log(projectId);
       toast.success("Delete Data Project Berhasil !");
       setAllDataProject((prevData) =>
         prevData.filter((project) => project.iddata_project !== projectId)
@@ -71,7 +68,6 @@ const DataProject = () => {
         prevData.filter((project) => project.iddata_project !== projectId)
       );
     } catch (error) {
-      console.log(error);
       toast.error("Delete Data Project Gagal !");
     }
   };
@@ -86,9 +82,7 @@ const DataProject = () => {
           },
         }
       );
-      console.log(response);
       setFilteredProject(response.data.data);
-      console.log(filteredProject);
     } catch (error) {
       console.log(error);
     }
@@ -162,7 +156,6 @@ const DataProject = () => {
 
   const handleEditSubmit = async (e) => {
     e.preventDefault();
-    // Check if the new nomorSi already exists in other projects
     const nomorSiExists = allDataProject.some(
       (project) =>
         project.no_si === editingProject.no_si &&
@@ -173,7 +166,7 @@ const DataProject = () => {
       toast.error(
         "Nomor SI/SP sudah ada pada project lain, silakan gunakan nomor yang berbeda."
       );
-      return; // Prevent submission
+      return;
     }
     try {
       const response = await axios.put(
@@ -182,7 +175,6 @@ const DataProject = () => {
       );
       if (response.data.success) {
         toast.success("Project updated successfully!");
-        // Update local state
         setAllDataProject((prevData) =>
           prevData.map((proj) =>
             proj.iddata_project === editingProject.iddata_project
@@ -248,7 +240,6 @@ const DataProject = () => {
           profit: (25 / 100) * nilai_project,
         })
       );
-      console.log("Data yang dikirim :", finansial);
       const response = await axios.post(
         "http://localhost:3000/api/finansial/add-finansial",
         finansial

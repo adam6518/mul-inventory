@@ -12,8 +12,6 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    console.log("Event terpanggil");
-
     e.preventDefault();
     console.log(username, password);
 
@@ -32,8 +30,6 @@ const Login = () => {
         sessionStorage.setItem("userRole", response.data.role);
         sessionStorage.setItem("isLoggedIn", response.data.isLoggedIn);
         console.log(typeof response.data.isLoggedIn);
-
-        // navigate("/dataproject", { replace: true });
         window.location.href = "/dataproject";
       } else {
         toast.error(response.data.message || "Login Gagal !");
@@ -70,12 +66,6 @@ const Login = () => {
         </div>
         <button type="submit" className="form-btn-sign-in btn btn-warning">
           Sign In
-          {/* <Link
-            style={{ textDecoration: "none", color: "inherit" }}
-            to="/dataproject"
-          >
-            Sign In
-          </Link> */}
         </button>
         <p className="form-p">
           Notes : Harap hubungi Admin jika belum mempunyai akun !

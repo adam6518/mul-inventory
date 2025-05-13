@@ -75,7 +75,6 @@ const Order = () => {
       const response = await axios.get(
         "http://localhost:3000/api/order/get-order"
       );
-      console.log(response.data.data);
       if (response.data.data && response.data.data.length > 0) {
         setAllDataOrder(response.data.data);
       } else {
@@ -94,19 +93,50 @@ const Order = () => {
     });
   };
 
+  const searchDataOrder = async (query) => {
+    try {
+      const response = await axios.get(
+        "http://localhost:3000/api/order/search-order",
+        {
+          params: {
+            itemPekerjaan: query,
+          },
+        }
+      );
+      setFilteredOrder(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteDataOrder = async (orderId) => {
+    try {
+      const request = await axios.delete(
+        `http://localhost:3000/api/order/delete-order/${orderId}`
+      );
+      toast.success("Delete Data Order Berhasil !");
+      setAllDataOrder((prevData) =>
+        prevData.filter((order) => order.iddata_order !== orderId)
+      );
+      setFilteredOrder((prevData) =>
+        prevData.filter((order) => order.iddata_order !== orderId)
+      );
+    } catch (error) {
+      toast.error("Delete Data Order Gagal !");
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formattedOrder = {
       ...order,
       tanggalChecklist: formatDateForInput(order.tanggalChecklist),
     };
-
     try {
       const response = await axios.post(
         "http://localhost:3000/api/order/add-order",
         formattedOrder
       );
-      console.log(response);
       if (response.data.success) {
         toast.success(response.data.message || "Order Berhasil Ditambahkan !");
         setOrder({
@@ -123,27 +153,8 @@ const Order = () => {
         toast.error(response.datamessage || "Gagal Menambahkan Order!");
       }
     } catch (error) {
-      console.log(error);
       toast.error("Tolong isi semua field nya");
     }
-  };
-
-  const backToDataProject = async () => {
-    navigate("/dataproject");
-  };
-
-  const cancelOrderForm = async () => {
-    toast.error(
-      "Anda membatalkan order, silahkan kembali ke halaman Data Project dan klik Go to Detail jika ingin melakukan order"
-    );
-    setOrder((prev) => ({
-      ...prev,
-      namaProject: "",
-      tahapan: "",
-    }));
-    setOrderForm(false);
-    getAllDataOrder();
-    navigate("/order", { replace: true, state: null });
   };
 
   const handleEditInputChange = async (e) => {
@@ -160,7 +171,6 @@ const Order = () => {
       ...editingOrder,
       tanggal_checklist: formatDateForInput(editingOrder.tanggal_checklist),
     };
-
     try {
       const response = await axios.put(
         `http://localhost:3000/api/order/update-order`,
@@ -189,6 +199,24 @@ const Order = () => {
     } catch (error) {}
   };
 
+  const backToDataProject = async () => {
+    navigate("/dataproject");
+  };
+
+  const cancelOrderForm = async () => {
+    toast.error(
+      "Anda membatalkan order, silahkan kembali ke halaman Data Project dan klik Go to Detail jika ingin melakukan order"
+    );
+    setOrder((prev) => ({
+      ...prev,
+      namaProject: "",
+      tahapan: "",
+    }));
+    setOrderForm(false);
+    getAllDataOrder();
+    navigate("/order", { replace: true, state: null });
+  };
+
   const openEditForm = async (order) => {
     setOrder((prev) => ({
       ...prev,
@@ -204,42 +232,6 @@ const Order = () => {
     setEditingOrder(null);
   };
 
-  const searchDataOrder = async (query) => {
-    try {
-      const response = await axios.get(
-        "http://localhost:3000/api/order/search-order",
-        {
-          params: {
-            itemPekerjaan: query,
-          },
-        }
-      );
-      console.log(response);
-      setFilteredOrder(response.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const deleteDataOrder = async (orderId) => {
-    try {
-      const request = await axios.delete(
-        `http://localhost:3000/api/order/delete-order/${orderId}`
-      );
-      console.log(orderId);
-      toast.success("Delete Data Order Berhasil !");
-      setAllDataOrder((prevData) =>
-        prevData.filter((order) => order.iddata_order !== orderId)
-      );
-      setFilteredOrder((prevData) =>
-        prevData.filter((order) => order.iddata_order !== orderId)
-      );
-    } catch (error) {
-      console.log(error);
-      toast.error("Delete Data Order Gagal !");
-    }
-  };
-
   const submitToRiwayat = async (e) => {
     e.preventDefault();
     try {
@@ -252,7 +244,6 @@ const Order = () => {
           tanggalOrder: formattedDate,
         })
       );
-      console.log("Data riwayat yang dikirim:", riwayatOrder);
       const response = await axios.post(
         "http://localhost:3000/api/riwayat/add-riwayat",
         riwayatOrder
