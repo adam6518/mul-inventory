@@ -33,6 +33,8 @@ const Order = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     console.log("Location state:", location.state);
     if (
@@ -72,9 +74,7 @@ const Order = () => {
 
   const getAllDataOrder = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:3000/api/order/get-order"
-      );
+      const response = await axios.get(`${API_BASE_URL}/api/order/get-order`);
       if (response.data.data && response.data.data.length > 0) {
         setAllDataOrder(response.data.data);
       } else {
@@ -96,7 +96,7 @@ const Order = () => {
   const searchDataOrder = async (query) => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/order/search-order",
+        `${API_BASE_URL}/api/order/search-order`,
         {
           params: {
             itemPekerjaan: query,
@@ -112,7 +112,7 @@ const Order = () => {
   const deleteDataOrder = async (orderId) => {
     try {
       const request = await axios.delete(
-        `http://localhost:3000/api/order/delete-order/${orderId}`
+        `${API_BASE_URL}/api/order/delete-order/${orderId}`
       );
       toast.success("Delete Data Order Berhasil !");
       setAllDataOrder((prevData) =>
@@ -134,7 +134,7 @@ const Order = () => {
     };
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/order/add-order",
+        `${API_BASE_URL}/api/order/add-order`,
         formattedOrder
       );
       if (response.data.success) {
@@ -173,7 +173,7 @@ const Order = () => {
     };
     try {
       const response = await axios.put(
-        `http://localhost:3000/api/order/update-order`,
+        `${API_BASE_URL}/api/order/update-order`,
         formattedEditOrder
       );
       if (response.data.success) {
@@ -245,7 +245,7 @@ const Order = () => {
         })
       );
       const response = await axios.post(
-        "http://localhost:3000/api/riwayat/add-riwayat",
+        `${API_BASE_URL}/api/riwayat/add-riwayat`,
         riwayatOrder
       );
       if (response.data.success) {
@@ -253,7 +253,7 @@ const Order = () => {
           response.data.message || "Riwayat Berhasil Ditambahkan !"
         );
         const request = await axios.delete(
-          "http://localhost:3000/api/order/delete-all-order"
+          `${API_BASE_URL}/api/order/delete-all-order`
         );
         setAllDataOrder([]);
         setFilteredOrder([]);

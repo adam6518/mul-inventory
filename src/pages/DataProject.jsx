@@ -27,6 +27,8 @@ const DataProject = () => {
   const [isAddFormVisible, setIsAddFormVisible] = useState(false);
   const [dataForOrder, setDataForOrder] = useState(null);
 
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
+
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -43,7 +45,7 @@ const DataProject = () => {
   const getAllDataProject = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/project/get-project"
+        `${API_BASE_URL}/api/project/get-project`
       );
       if (response.data.data && response.data.data.length > 0) {
         setAllDataProject(response.data.data);
@@ -58,7 +60,7 @@ const DataProject = () => {
   const deleteDataProject = async (projectId) => {
     try {
       const request = await axios.delete(
-        `http://localhost:3000/api/project/delete-project/${projectId}`
+        `${API_BASE_URL}/api/project/delete-project/${projectId}`
       );
       toast.success("Delete Data Project Berhasil !");
       setAllDataProject((prevData) =>
@@ -75,7 +77,7 @@ const DataProject = () => {
   const searchDataProject = async (query) => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/project/search-project",
+        `${API_BASE_URL}/api/project/search-project`,
         {
           params: {
             namaProject: query,
@@ -111,7 +113,7 @@ const DataProject = () => {
     }
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/project/add-project",
+        `${API_BASE_URL}/api/project/add-project`,
         formValues
       );
       console.log(response, "res");
@@ -170,7 +172,7 @@ const DataProject = () => {
     }
     try {
       const response = await axios.put(
-        `http://localhost:3000/api/project/update-project`,
+        `${API_BASE_URL}/api/project/update-project`,
         editingProject
       );
       if (response.data.success) {
@@ -241,7 +243,7 @@ const DataProject = () => {
         })
       );
       const response = await axios.post(
-        "http://localhost:3000/api/finansial/add-finansial",
+        `${API_BASE_URL}/api/finansial/add-finansial`,
         finansial
       );
       if (response.data.success) {

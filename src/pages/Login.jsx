@@ -11,17 +11,15 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(username, password);
-
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/auth/login-user",
-        { username: username, password: password }
-      );
-      console.log(response.data);
-
+      const response = await axios.post(`${API_BASE_URL}/api/auth/login-user`, {
+        username: username,
+        password: password,
+      });
       if (response.data.success) {
         toast.success(response.data.message || "Login Berhasil !");
         console.log(response);

@@ -24,6 +24,8 @@ const DataUser = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     getAllDataUser();
   }, []);
@@ -36,7 +38,7 @@ const DataUser = () => {
   const getAllDataUser = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/user/get-user"
+        `${API_BASE_URL}/api/user/get-user`
       );
       console.log(response);
       if (response.data.data && response.data.data.length > 0) {
@@ -52,7 +54,7 @@ const DataUser = () => {
   const deleteUser = async (userId) => {
     try {
       const request = await axios.delete(
-        `http://localhost:3000/api/user/delete-user/${userId}`
+        `${API_BASE_URL}/api/user/delete-user/${userId}`
       );
       console.log(userId);
       toast.success("Delete Data User Berhasil !");
@@ -70,7 +72,7 @@ const DataUser = () => {
   const searchDataUser = async (query) => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/user/search-user",
+        `${API_BASE_URL}/api/user/search-user`,
         {
           params: {
             nama: query,
@@ -108,7 +110,7 @@ const DataUser = () => {
     }
     try {
       const response = await axios.put(
-        `http://localhost:3000/api/user/update-user`,
+        `${API_BASE_URL}/api/user/update-user`,
         editingUser
       );
       if (response.data.success) {
@@ -161,7 +163,7 @@ const DataUser = () => {
     }
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/register-user",
+        `${API_BASE_URL}/api/auth/register-user`,
         formValues
       );
       console.log(response, "res");

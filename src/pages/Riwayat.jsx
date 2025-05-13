@@ -15,6 +15,8 @@ const Riwayat = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     getAllDataRiwayat();
     sortDate(sortRiwayat);
@@ -27,7 +29,7 @@ const Riwayat = () => {
   const getAllDataRiwayat = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/riwayat/get-riwayat"
+        `${API_BASE_URL}/api/riwayat/get-riwayat`
       );
       if (response.data.data && response.data.data.length > 0) {
         setAllDataRiwayat(response.data.data);
@@ -42,7 +44,7 @@ const Riwayat = () => {
   const searchRiwayat = async (query) => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/riwayat/search-riwayat",
+        `${API_BASE_URL}/api/riwayat/search-riwayat`,
         {
           params: {
             item: query,
@@ -62,7 +64,7 @@ const Riwayat = () => {
   const sortDate = async (order) => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/riwayat/sort-riwayat?order=${order}`
+        `${API_BASE_URL}/api/riwayat/sort-riwayat?order=${order}`
       );
       if (response.data.data) {
         setFilteredRiwayat(response.data.data);

@@ -15,6 +15,8 @@ const Finansial = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     getAllDataFinansial();
     sortPendapatan(sortFinansial);
@@ -28,7 +30,7 @@ const Finansial = () => {
   const getAllDataFinansial = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/finansial/get-finansial"
+        `${API_BASE_URL}/api/finansial/get-finansial`
       );
       if (response.data.data && response.data.data.length > 0) {
         setAllFinansial(response.data.data);
@@ -43,7 +45,7 @@ const Finansial = () => {
   const searchFinansial = async (query) => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/finansial/search-finansial",
+        `${API_BASE_URL}/api/finansial/search-finansial`,
         {
           params: {
             item: query,
@@ -69,7 +71,7 @@ const Finansial = () => {
   const sortPendapatan = async (order) => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/finansial/sort-finansial?order=${order}`
+        `${API_BASE_URL}/api/finansial/sort-finansial?order=${order}`
       );
       if (response.data.data) {
         setFilteredFinansial(response.data.data);
