@@ -28,44 +28,39 @@ function App() {
   const renderApp = () => {
     console.log(getUserRole);
     console.log(isLoggedIn);
-
     if (getUserRole === "admin" && isLoggedIn) {
       return (
         <>
-          <Route
-            path="/"
-            Component={Login}
-            element={<Navigate to="/dataproject" replace />}
-          />
-          <Route path="/dataproject" Component={DataProject} />
-          <Route path="/datauser" Component={DataUser} />
-          <Route path="/order" Component={Order} />
-          <Route path="/riwayat" Component={Riwayat} />
-          <Route path="/finance" Component={Finansial} />
+          <Route path="/" element={<Navigate to="/dataproject" replace />} />
+          <Route path="/dataproject" element={<DataProject />} />
+          <Route path="/datauser" element={<DataUser />} />
+          <Route path="/order" element={<Order />} />
+          <Route path="/riwayat" element={<Riwayat />} />
+          <Route path="/finance" element={<Finansial />} />
         </>
       );
     } else if (getUserRole === "user" && isLoggedIn) {
       return (
         <>
-          <Route path="/dataproject" Component={DataProject} />
+          <Route path="/dataproject" element={<DataProject />} />
           <Route
             path="/datauser"
-            Component={DataProject}
-            element={() => {
-              toast.error("Anda bukan admin");
-              return <Navigate to="/dataproject" />;
-            }}
+            element={
+              <>
+                {toast.error("Anda bukan admin")}
+                <Navigate to="/dataproject" />
+              </>
+            }
           />
-          <Route path="/order" Component={Order} />
+          <Route path="/order" element={<Order />} />
         </>
       );
     } else {
       return (
         <>
-          <Route path="/" Component={Login} element={<Navigate to="/" />} />
+          <Route path="/" element={<Login />} />
           <Route
             path="/dataproject"
-            // Component={Login}
             element={
               <ProtectedRoute>
                 <DataProject />
@@ -74,7 +69,6 @@ function App() {
           />
           <Route
             path="/datauser"
-            // Component={Login}
             element={
               <ProtectedRoute>
                 <DataUser />
@@ -83,7 +77,6 @@ function App() {
           />
           <Route
             path="/order"
-            // Component={Login}
             element={
               <ProtectedRoute>
                 <Order />
@@ -92,7 +85,6 @@ function App() {
           />
           <Route
             path="/riwayat"
-            // Component={Login}
             element={
               <ProtectedRoute>
                 <Riwayat />
@@ -101,16 +93,98 @@ function App() {
           />
           <Route
             path="/finance"
-            // Component={Login}
             element={
               <ProtectedRoute>
-                <Riwayat />
+                <Finansial />
               </ProtectedRoute>
             }
           />
         </>
       );
     }
+
+    // if (getUserRole === "admin" && isLoggedIn) {
+    //   return (
+    //     <>
+    //       <Route
+    //         path="/"
+    //         Component={Login}
+    //         element={<Navigate to="/dataproject" replace />}
+    //       />
+    //       <Route path="/dataproject" Component={DataProject} />
+    //       <Route path="/datauser" Component={DataUser} />
+    //       <Route path="/order" Component={Order} />
+    //       <Route path="/riwayat" Component={Riwayat} />
+    //       <Route path="/finance" Component={Finansial} />
+    //     </>
+    //   );
+    // } else if (getUserRole === "user" && isLoggedIn) {
+    //   return (
+    //     <>
+    //       <Route path="/dataproject" Component={DataProject} />
+    //       <Route
+    //         path="/datauser"
+    //         Component={DataProject}
+    //         element={() => {
+    //           toast.error("Anda bukan admin");
+    //           return <Navigate to="/dataproject" />;
+    //         }}
+    //       />
+    //       <Route path="/order" Component={Order} />
+    //     </>
+    //   );
+    // } else {
+    //   return (
+    //     <>
+    //       <Route path="/" Component={Login} element={<Navigate to="/" />} />
+    //       <Route
+    //         path="/dataproject"
+    //         // Component={Login}
+    //         element={
+    //           <ProtectedRoute>
+    //             <DataProject />
+    //           </ProtectedRoute>
+    //         }
+    //       />
+    //       <Route
+    //         path="/datauser"
+    //         // Component={Login}
+    //         element={
+    //           <ProtectedRoute>
+    //             <DataUser />
+    //           </ProtectedRoute>
+    //         }
+    //       />
+    //       <Route
+    //         path="/order"
+    //         // Component={Login}
+    //         element={
+    //           <ProtectedRoute>
+    //             <Order />
+    //           </ProtectedRoute>
+    //         }
+    //       />
+    //       <Route
+    //         path="/riwayat"
+    //         // Component={Login}
+    //         element={
+    //           <ProtectedRoute>
+    //             <Riwayat />
+    //           </ProtectedRoute>
+    //         }
+    //       />
+    //       <Route
+    //         path="/finance"
+    //         // Component={Login}
+    //         element={
+    //           <ProtectedRoute>
+    //             <Riwayat />
+    //           </ProtectedRoute>
+    //         }
+    //       />
+    //     </>
+    //   );
+    // }
   };
 
   return (
