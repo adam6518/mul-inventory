@@ -40,7 +40,10 @@ const Login = () => {
       }
     } catch (error) {
       console.log("Terdapat eror saat login : ", error);
-      toast.error(error.response.data.message || "Coba lagi");
+      toast.error(
+        error?.response?.data?.message ||
+          "Terjadi kesalahan jaringan. Coba lagi."
+      );
     }
   };
 
