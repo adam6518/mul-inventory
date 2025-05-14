@@ -15,13 +15,17 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("API_BASE_URL:", API_BASE_URL);
+    console.log("Username:", username);
+    console.log("Password:", password);
     try {
       const response = await axios.post(`${API_BASE_URL}/api/auth/login-user`, {
         username: username,
         password: password,
       });
-      console.log(response);
-      
+      console.log(response.data.data);
+      console.log(response.data);
+
       if (response.data.success) {
         toast.success(response.data.message || "Login Berhasil !");
         console.log(response);
